@@ -1,119 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For Kannamma ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      color: #333;
-      text-align: center;
-    }
-    section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    img {
-      width: 80%;
-      max-width: 320px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      margin-bottom: 20px;
-    }
-    h1, h2 {
-      margin: 10px 0;
-    }
-    .tamil {
-      font-size: 1.3em;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-    .buttons {
-      margin-top: 30px;
-      position: relative;
-      height: 100px;
-    }
-    button {
-      padding: 12px 25px;
-      font-size: 1.1em;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-    }
-    #yes {
-      background: #ff4d6d;
-      color: white;
-      margin-right: 20px;
-    }
-    #no {
-      background: #ddd;
-      position: absolute;
-    }
-    #final {
-      display: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Kannamma ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(#ffdde1, #ee9ca7);
+  text-align: center;
+  overflow: hidden;
+}
+
+.section {
+  display: none;
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.section.active {
+  display: block;
+}
+
+img {
+  max-width: 80%;
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+button {
+  padding: 14px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.next-btn {
+  background: #ff5e7e;
+  color: white;
+}
+
+.yes {
+  background: #4CAF50;
+  color: white;
+}
+
+.no {
+  background: #f44336;
+  color: white;
+  position: absolute;
+}
+
+.heart {
+  position: fixed;
+  font-size: 24px;
+  animation: float 3s linear forwards;
+}
+
+@keyframes float {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-200px); }
+}
+</style>
 </head>
+
 <body>
 
-  <!-- Section 1 -->
-  <section>
-    <img src="photo1.jpg" alt="Us">
-    <h1>Hey Kannamma 👀❤️</h1>
-    <h2>I made something just for you...</h2>
-  </section>
+<!-- PAGE 1 -->
+<div class="section active">
+  <h1>Hey Kannamma ❤️</h1>
+  <img src="photo1.jpg">
+  <p>I made something special just for you…</p>
+  <br>
+  <button class="next-btn" onclick="nextPage()">Click me, love 💕</button>
+</div>
 
-  <!-- Section 2 -->
-  <section>
-    <img src="photo2.jpg" alt="Love">
-    <div class="tamil">“உறவாக நீயிருந்தால் துயறொன்றும் தெரியாதே…..”</div>
-  </section>
+<!-- PAGE 2 -->
+<div class="section">
+  <img src="photo2.jpg">
+  <h2>“உறவாக நீயிருந்தால்  
+  துயறொன்றும் தெரியாதே…..”</h2>
+  <br>
+  <button class="next-btn" onclick="nextPage()">Click me, love 💕</button>
+</div>
 
-  <!-- Section 3 -->
-  <section>
-    <img src="photo3.jpg" alt="Cute">
-    <h2>Life feels a little more fun with you 😄</h2>
-    <h2>So I have a tiny question...</h2>
-  </section>
+<!-- PAGE 3 -->
+<div class="section">
+  <img src="photo3.jpg">
+  <h2>You make my world brighter every single day 😘</h2>
+  <br>
+  <button class="next-btn" onclick="nextPage()">Click me, love 💕</button>
+</div>
 
-  <!-- Section 4 -->
-  <section>
-    <h1>Will you be my Valentine, Kannamma? 💌</h1>
-    <div class="buttons">
-      <button id="yes" onclick="sayYes()">Yes 😍</button>
-      <button id="no">No 😏</button>
-    </div>
-  </section>
+<!-- PAGE 4 -->
+<div class="section">
+  <img src="photo4.jpg">
+  <h1>Will you be my Valentine? 💖</h1>
 
-  <!-- Final -->
-  <section id="final">
-    <img src="photo4.jpg" alt="Happy">
-    <h1>YAYYYY 💖💖💖</h1>
-    <h2>You just made me the happiest person 😍</h2>
-    <iframe width="0" height="0" src="https://www.youtube.com/embed/rZvhOxBWb0E?autoplay=1&loop=1&playlist=rZvhOxBWb0E" frameborder="0" allow="autoplay"></iframe>
-  </section>
+  <button class="yes" onclick="sayYes()">YES ❤️</button>
+  <button class="no" id="noBtn">NO 🙈</button>
+</div>
 
-  <script>
-    const noBtn = document.getElementById('no');
-    noBtn.addEventListener('mouseover', () => {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 200 - 50;
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    });
+<!-- FINAL PAGE -->
+<div class="section">
+  <h1>I love you, Kannamma ❤️</h1>
+  <h2>Today. Tomorrow. Always.</h2>
+</div>
 
-    function sayYes() {
-      document.getElementById('final').style.display = 'flex';
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-  </script>
+<!-- AUDIO -->
+<audio id="song">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let current = 0;
+const sections = document.querySelectorAll('.section');
+
+function nextPage() {
+  sections[current].classList.remove('active');
+  current++;
+  sections[current].classList.add('active');
+}
+
+// YES CLICK
+function sayYes() {
+  document.getElementById('song').play();
+  launchConfetti();
+  createHearts();
+  sections[current].classList.remove('active');
+  current++;
+  sections[current].classList.add('active');
+}
+
+// NO BUTTON RUNS
+const noBtn = document.getElementById('noBtn');
+noBtn.addEventListener('mouseover', moveNo);
+noBtn.addEventListener('click', moveNo);
+
+function moveNo() {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+// HEARTS
+function createHearts() {
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.bottom = '0px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
+  }
+}
+
+// CONFETTI
+function launchConfetti() {
+  for (let i = 0; i < 30; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.position = 'fixed';
+    confetti.style.width = '8px';
+    confetti.style.height = '8px';
+    confetti.style.background = 'white';
+    confetti.style.left = Math.random() * window.innerWidth + 'px';
+    confetti.style.top = '0px';
+    confetti.style.opacity = Math.random();
+    confetti.style.animation = 'float 3s linear forwards';
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+</script>
 
 </body>
 </html>
-
