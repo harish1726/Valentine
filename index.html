@@ -11,13 +11,12 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(#ffdde1, #ee9ca7);
   text-align: center;
-  overflow: hidden;
 }
 
 .section {
   display: none;
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: 30px 20px;
   box-sizing: border-box;
 }
 
@@ -26,7 +25,9 @@ body {
 }
 
 img {
-  max-width: 80%;
+  max-width: 90%;
+  max-height: 55vh;
+  object-fit: cover;
   border-radius: 20px;
   margin: 20px 0;
 }
@@ -42,11 +43,13 @@ button {
 .next-btn {
   background: #ff5e7e;
   color: white;
+  margin-top: 20px;
 }
 
 .yes {
   background: #4CAF50;
   color: white;
+  margin-right: 10px;
 }
 
 .no {
@@ -75,7 +78,6 @@ button {
   <h1>Hey Kannamma ❤️</h1>
   <img src="photo1.jpg">
   <p>I made something special just for you…</p>
-  <br>
   <button class="next-btn" onclick="nextPage()">Click me, love 💕</button>
 </div>
 
@@ -84,7 +86,6 @@ button {
   <img src="photo2.jpg">
   <h2>“உறவாக நீயிருந்தால்  
   துயறொன்றும் தெரியாதே…..”</h2>
-  <br>
   <button class="next-btn" onclick="nextPage()">Click me, love 💕</button>
 </div>
 
@@ -92,7 +93,6 @@ button {
 <div class="section">
   <img src="photo3.jpg">
   <h2>You make my world brighter every single day 😘</h2>
-  <br>
   <button class="next-btn" onclick="nextPage()">Click me, love 💕</button>
 </div>
 
