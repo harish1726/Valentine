@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +13,14 @@ body {
   overflow: hidden;
 }
 
+/* PAGES */
 .page {
   display: none;
   height: 100vh;
   width: 100vw;
-  text-align: center;
   padding: 20px;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .page.active {
@@ -29,6 +30,102 @@ body {
   align-items: center;
 }
 
+/* ENVELOPE */
+.envelope {
+  width: 330px;
+  height: 230px;
+  background: #fff;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  animation: pop 1.2s ease;
+}
+
+/* Envelope flap */
+.envelope::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff8fa3;
+  clip-path: polygon(0 0,100% 0,50% 50%);
+}
+
+/* Heart seal */
+.seal {
+  position: absolute;
+  top: 78px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  animation: sealBreak 2s ease forwards;
+}
+
+@keyframes sealBreak {
+  0% { transform: translateX(-50%) scale(1); }
+  60% { transform: translateX(-50%) scale(1.3); }
+  100% { transform: translateX(-50%) scale(0); opacity: 0; }
+}
+
+/* LETTER */
+.letter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 170px;
+  background: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 0 0 12px 12px;
+  animation: slideUp 1.5s ease forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(90px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes pop {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* TEXT */
+.letter p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Hidden signature */
+.signature {
+  opacity: 0;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  animation: reveal 1.5s ease forwards;
+  animation-delay: 2s;
+}
+
+@keyframes reveal {
+  to { opacity: 1; }
+}
+
+/* BUTTON */
+button {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 25px;
+  background: #ff5e78;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+button:hover { background: #ff2f5b; }
+
+/* IMAGES */
 img {
   width: 260px;
   max-width: 85%;
@@ -36,41 +133,17 @@ img {
   margin-bottom: 15px;
 }
 
-h1 { font-size: 2.1rem; }
-h2 { font-size: 1.6rem; }
-p  { font-size: 1.1rem; }
-
-button {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 25px;
-  background: #ff5e78;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 15px;
-}
-
+/* YES / NO */
 .choice {
   position: relative;
   width: 320px;
   height: 140px;
 }
 
-#yesBtn {
-  position: absolute;
-  left: 20px;
-  top: 60px;
-}
+#yesBtn { position: absolute; left: 20px; top: 60px; }
+#noBtn  { position: absolute; left: 180px; top: 60px; background: #999; }
 
-#noBtn {
-  position: absolute;
-  left: 180px;
-  top: 60px;
-  background: #999;
-}
-
-/* Floating hearts */
+/* HEARTS */
 .heart {
   position: fixed;
   bottom: -20px;
@@ -82,7 +155,7 @@ button {
   to { transform: translateY(-120vh); }
 }
 
-/* Confetti */
+/* CONFETTI */
 .confetti {
   position: fixed;
   width: 8px;
@@ -95,7 +168,7 @@ button {
   to { transform: translateY(120vh) rotate(360deg); }
 }
 
-/* Forever animation */
+/* FOREVER */
 #forever {
   font-size: 2.2rem;
   margin-top: 20px;
@@ -112,8 +185,27 @@ button {
 
 <body>
 
-<!-- PAGE 1 -->
+<!-- 🌸 PAGE 0 : ENVELOPE -->
 <div class="page active">
+  <div class="envelope">
+    <div class="seal">❤️</div>
+    <div class="letter">
+      <p>
+        என் காதல் கண்ணம்மா,<br>
+        மீண்டும் ஒரு முறை நான் kadithathudan ❤️
+      </p>
+      <div class="signature">
+        — Harish<br>
+        14 Feb ❤️
+      </div>
+    </div>
+  </div>
+
+  <button onclick="nextPage()">என் இதயம் இதோ… 💌</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page">
   <img src="photo1.jpg">
   <h1>Hey Kannamma ❤️</h1>
   <p>“உறவாக நீயிருந்தால் துயறொன்றும் தெரியாதே…..”</p>
@@ -144,7 +236,6 @@ button {
 <div class="page">
   <img src="photo4.jpg">
   <h2>Will you be my Valentine, Kannamma? 💖</h2>
-
   <div class="choice">
     <button id="yesBtn" onclick="sayYes()">YES 😍</button>
     <button id="noBtn" onmouseover="runAway()">NO 🙈</button>
@@ -174,13 +265,13 @@ function runAway() {
 
 function sayYes() {
   song.currentTime = 0;
-  song.play().catch(err => console.log("Audio blocked:", err));
+  song.play();
   confetti();
   finalScreen();
 }
 
 function confetti() {
-  for (let i=0;i<80;i++){
+  for (let i=0;i<90;i++){
     const c=document.createElement('div');
     c.className='confetti';
     c.style.left=Math.random()*100+'vw';
@@ -200,7 +291,7 @@ function finalScreen() {
   `;
 }
 
-/* Floating hearts */
+/* Hearts rain */
 setInterval(()=>{
   const h=document.createElement('div');
   h.className='heart';
@@ -208,7 +299,7 @@ setInterval(()=>{
   h.style.left=Math.random()*100+'vw';
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
-},400);
+},300);
 </script>
 
 </body>
