@@ -1,39 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Kannamma ❤️</title>
 
 <style>
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  background: linear-gradient(135deg,#ffdde1,#ee9ca7);
   overflow: hidden;
-}
-
-/* Floating Hearts */
-.heart {
-  position: fixed;
-  bottom: -20px;
-  font-size: 20px;
-  animation: floatUp 6s linear infinite;
-  opacity: 0.6;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(0); }
-  to { transform: translateY(-110vh); }
 }
 
 .page {
   display: none;
   height: 100vh;
   width: 100vw;
+  text-align: center;
   padding: 20px;
   box-sizing: border-box;
-  text-align: center;
 }
 
 .page.active {
@@ -43,41 +29,32 @@ body {
   align-items: center;
 }
 
-h1 { font-size: 2.2rem; }
+img {
+  width: 260px;
+  max-width: 85%;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+h1 { font-size: 2.1rem; }
 h2 { font-size: 1.6rem; }
 p  { font-size: 1.1rem; }
 
 button {
-  padding: 12px 22px;
-  font-size: 1rem;
+  padding: 12px 24px;
   border: none;
   border-radius: 25px;
   background: #ff5e78;
   color: white;
+  font-size: 1rem;
   cursor: pointer;
   margin-top: 15px;
 }
 
-button:hover { background: #ff2f5b; }
-
-img {
-  width: 250px;
-  max-width: 80%;
-  border-radius: 20px;
-  margin: 15px 0;
-}
-
-.choice-btns {
+.choice {
   position: relative;
-  width: 300px;
+  width: 320px;
   height: 140px;
-}
-
-#noBtn {
-  position: absolute;
-  left: 160px;
-  top: 60px;
-  background: #999;
 }
 
 #yesBtn {
@@ -86,10 +63,23 @@ img {
   top: 60px;
 }
 
-.big-text {
-  font-size: 2rem;
-  font-weight: bold;
-  padding: 20px;
+#noBtn {
+  position: absolute;
+  left: 180px;
+  top: 60px;
+  background: #999;
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 22px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  to { transform: translateY(-120vh); }
 }
 
 /* Confetti */
@@ -97,13 +87,25 @@ img {
   position: fixed;
   width: 8px;
   height: 8px;
-  background: red;
   top: -10px;
   animation: fall 3s linear infinite;
 }
 
 @keyframes fall {
-  to { transform: translateY(110vh) rotate(360deg); }
+  to { transform: translateY(120vh) rotate(360deg); }
+}
+
+/* Forever animation */
+#forever {
+  font-size: 2.2rem;
+  margin-top: 20px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 </style>
 </head>
@@ -112,6 +114,7 @@ img {
 
 <!-- PAGE 1 -->
 <div class="page active">
+  <img src="photo1.jpg">
   <h1>Hey Kannamma ❤️</h1>
   <p>“உறவாக நீயிருந்தால் துயறொன்றும் தெரியாதே…..”</p>
   <button onclick="nextPage()">Click on me love ❤️</button>
@@ -119,105 +122,93 @@ img {
 
 <!-- PAGE 2 -->
 <div class="page">
-  <img src="photo1.jpg">
-  <p>
-    With you, even silence feels comforting 🥰  
-  </p>
+  <img src="photo2.jpg">
+  <p>You make ordinary moments feel magical ✨</p>
   <button onclick="nextPage()">Click on me love ❤️</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page">
-  <img src="photo2.jpg">
-  <p>
-    You are my calm, my chaos, and my favorite person 💖
-  </p>
+  <img src="photo3.jpg">
+  <p>With you, everything feels right 💕</p>
   <button onclick="nextPage()">Click on me love ❤️</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page">
-  <div class="big-text">
-    I have a silly yet important question  
-    to ask to u.
-  </div>
+  <h1>I have a silly yet important question to ask to u.</h1>
   <button onclick="nextPage()">Click on me love ❤️</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page">
-  <h2>Will you be my Valentine, Kannamma? 💕</h2>
-  <div class="choice-btns">
+  <img src="photo4.jpg">
+  <h2>Will you be my Valentine, Kannamma? 💖</h2>
+
+  <div class="choice">
     <button id="yesBtn" onclick="sayYes()">YES 😍</button>
     <button id="noBtn" onmouseover="runAway()">NO 🙈</button>
   </div>
 </div>
 
-<audio id="song" src="song.mp3"></audio>
+<audio id="song" preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-let currentPage = 0;
+let current = 0;
 const pages = document.querySelectorAll('.page');
+const song = document.getElementById('song');
 
 function nextPage() {
-  pages[currentPage].classList.remove('active');
-  currentPage++;
-  pages[currentPage].classList.add('active');
+  pages[current].classList.remove('active');
+  current++;
+  pages[current].classList.add('active');
 }
 
-/* NO button runs */
 function runAway() {
-  const noBtn = document.getElementById('noBtn');
-  noBtn.style.left = Math.random() * 200 + "px";
-  noBtn.style.top = Math.random() * 90 + "px";
+  const no = document.getElementById('noBtn');
+  no.style.left = Math.random()*240 + "px";
+  no.style.top  = Math.random()*90 + "px";
 }
 
-/* YES action */
 function sayYes() {
-  document.getElementById('song').play();
-  createConfetti();
-  showFinalMessage();
+  song.currentTime = 0;
+  song.play().catch(err => console.log("Audio blocked:", err));
+  confetti();
+  finalScreen();
 }
 
-/* Confetti */
-function createConfetti() {
-  for (let i = 0; i < 80; i++) {
-    const conf = document.createElement('div');
-    conf.className = 'confetti';
-    conf.style.left = Math.random() * 100 + 'vw';
-    conf.style.background = `hsl(${Math.random()*360},100%,70%)`;
-    conf.style.animationDuration = (2 + Math.random() * 3) + 's';
-    document.body.appendChild(conf);
+function confetti() {
+  for (let i=0;i<80;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'vw';
+    c.style.background=`hsl(${Math.random()*360},100%,70%)`;
+    c.style.animationDuration=2+Math.random()*3+'s';
+    document.body.appendChild(c);
   }
 }
 
-/* Typing final slide */
-function showFinalMessage() {
+function finalScreen() {
   const page = document.querySelector('.page.active');
   page.innerHTML = `
-    <h1 id="typeText"></h1>
-    <p style="margin-top:20px;">Happy Valentine’s Day, Kannamma 💖</p>
-    <p>You are my today, tomorrow, and every silly forever ❤️</p>
+    <h1>You just made me the happiest person ❤️</h1>
+    <p>Happy Valentine’s Day, Kannamma 💖</p>
+    <p>You are my today, tomorrow, and always.</p>
+    <div id="forever">❤️ forever ❤️</div>
   `;
-
-  const text = "You just made me the happiest person alive ❤️";
-  let i = 0;
-  const typing = setInterval(() => {
-    document.getElementById('typeText').innerText += text.charAt(i);
-    i++;
-    if (i === text.length) clearInterval(typing);
-  }, 60);
 }
 
 /* Floating hearts */
-setInterval(() => {
-  const heart = document.createElement('div');
-  heart.className = 'heart';
-  heart.innerText = '❤️';
-  heart.style.left = Math.random() * 100 + 'vw';
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
-}, 400);
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerText='❤️';
+  h.style.left=Math.random()*100+'vw';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
 </script>
 
 </body>
